@@ -24,7 +24,8 @@ the difficulty is caluclated in NIPPLES
       `i`     `---' /
 ```
 
-
+How nipples work:
+```
 0 Nip: b000b5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF 
 1 Nip: b000b57FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF 
 2 Nip: b000b53FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF 
@@ -32,23 +33,30 @@ the difficulty is caluclated in NIPPLES
 4 Nip: b0000b5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF 
 ...
 236 Nip: b0000000000000000000000000000000000000000000000000000000000000b5
+```
 
 for less significant bit after b00[0]*5:
+```
 1111: f
 0111: 7
 0011: 3
 0001: 1
 0000: 0 ---> adds a 0 in b00b5
+```
 
 ### Transactions
 for signing transactions we will use ECDSA
+
 https://it.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm
 
 we will use "ed25519" curve for address generation:
+
 https://en.wikipedia.org/wiki/Curve25519
 
 why?
+
 https://safecurves.cr.yp.to/
+
 and it's also supported by elliptic library for nodeJS
 ```
                              .-.
@@ -62,8 +70,8 @@ and it's also supported by elliptic library for nodeJS
 
 ### Block Generation
 a block is generated every LOL 101hex seconds, 257seconds minutes, ~ 4 minutes
-nipples are calculated with an average ASS 455hex blocks, 2545 blocks, if time > 101hex go up else go down
 
+nipples are calculated with an average ASS 455hex blocks, 2545 blocks, if time > 101hex go up else go down
 
 ## Transaction
 ```json
@@ -109,11 +117,11 @@ nipples are calculated with an average ASS 455hex blocks, 2545 blocks, if time >
 ## blockchain
 ```json
 {
-    "depth": 0, // block depth
+    "depth": 0,
     "timestamp": 1234,
     "transactions": [],
     "before": "hash of the previous block",
-    "nonce": 0, // number to increment for calculation
-    "nipples": 1 // difficulty
+    "nonce": 0,
+    "nipples": 1
 }
 ```
