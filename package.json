@@ -1,0 +1,15 @@
+{
+  "name": "b00b5coin",
+  "version": "1.0.0",
+  "description": "another cryptocurrency",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "elliptic": "^6.4.0",
+    "express": "^4.16.2"
+  }
+}
