@@ -1,4 +1,4 @@
-# b00b5Chain [ (oYo) ]
+# b00b5Coin [ (oYo) ]
 Another cryptocurrency built for study (!scentific) purposes.
 Designed and built with all love in the world by Gianluca Pericoli
 
