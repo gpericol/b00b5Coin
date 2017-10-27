@@ -1,6 +1,12 @@
 "use strict";
 
 class MinerUtils{
+
+    /**
+     * calculateHashDifficulty() calculates the difficulty level of the hash
+     * @param {String} hash 
+     * @return {int} difficulty
+     */
     static calculateHashDifficulty(hash){
         let difficulty = 0;
         if(!hash.startsWith("b00")){
@@ -50,8 +56,14 @@ class MinerUtils{
         return -1;
     }
 
-    static validHash(hash, difficulty){
-	    if(this.calculateHashDifficulty(hash) >= difficulty){
+    /**
+     * validHash() returns true if hash difficulty is >= the target
+     * @param {String} hash 
+     * @param {int} target 
+     * @return {boolean} hash is valid
+     */
+    static validHash(hash, target){
+	    if(this.calculateHashDifficulty(hash) >= target){
 		    return true;
 	    }
         return false;

@@ -1,10 +1,10 @@
 # b00b5Coin [ (oYo) ]
-Another cryptocurrency built for study (!scentific) purposes.
-Designed and built with all love in the world by Gianluca Pericoli
+Another cryptocurrency built for study (!scientific) purposes.
+Designed and built with all the love in the world by Gianluca Pericoli
 
 ## Algorithms
 ### Proof of Work
-is just the HEX representation of SHA256 of the JSON Object (minified) on one block
+it's just the HEX representation of SHA256 of the JSON Object (minified) on one block
 the difficulty is caluclated in NIPPLES
 ```
            .-''-''-.
@@ -57,7 +57,7 @@ why?
 
 https://safecurves.cr.yp.to/
 
-and it's also supported by elliptic library for nodeJS
+and it's also supported by the elliptic library for nodeJS
 ```
                              .-.
 \___________________________() ^`-, < B4rK
@@ -71,7 +71,7 @@ and it's also supported by elliptic library for nodeJS
 ### Block Generation
 a block is generated every LOL 101hex seconds, 257seconds minutes, ~ 4 minutes
 
-nipples are calculated with an average ASS 455hex blocks, 2545 blocks, if time > 101hex go up else go down
+nipples are calculated with an average ASS A55hex blocks, 2545 blocks, if time > 101hex go up else go down
 
 ## Transaction
 ```json

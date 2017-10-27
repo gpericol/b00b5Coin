@@ -4,6 +4,9 @@ let crypto = require('../utils/crypto-utils');
 let miner = require('../utils/miner-utils');
 
 const genesisHash = "b0000000000000000000000000000000000000000000000000000000000000b5";
+const startNipples = 0;
+const expectedTime = 0x101; // LOL
+const nipplesAvg = 0xA55; // ASS
 
 class BlockChain{
     constructor(){
@@ -11,32 +14,73 @@ class BlockChain{
         this.transactions = [];
     }
 
+    /**
+     * lastblock() returns last block
+     * @return {Object} block
+     */
     lastBlock(){
         if(this.chain.length > 0){
             return this.chain[this.chain.length-1];
         }
+        // empty chain, no block
         return null;
     }
 
+    /**
+     * hashBlock() returns the hash of the block
+     * @param {Object} block
+     * @return {String} hash  
+     */
     hashBlock(block){
         return crypto.hash(crypto.minify(block))
     }
-   
+
+    /**
+     * nipplesDiff() makes an average of the time difference of 0xA55 blocks and increment or decrement the difficulty
+     * @return {int} -1 | 0 | 1 
+     */
+    nipplesDiff(){
+        // every nipplesAvg blocks
+        if(this.chain.length % nipplesAvg === 0){
+            let sum = 0;
+            for(let i = this.chain.length - nipplesAvg + 1 ; i < this.chain.length; i++){
+                sum += Math.floor((this.chain[i].timestamp - this.chain[i-1].timestamp) / 1000);
+            }
+            let avgTime = sum / (nipplesAvg-1);
+            if(avgTime < expectedTime){
+                console.log("[*] Difficulty +1, TimeAVG:" + avgTime);
+                return 1;
+            }else{
+                console.log("[*] Difficulty -1, TimeAVG:" + avgTime);
+                return -1;
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * addblock() generate a mine a new block
+     * @return {Object} block
+     */
     addBlock(){
         let beforeBlock = genesisHash;
+        let nipples = startNipples;
         let lastBlock = this.lastBlock();
 
         if(lastBlock){
+            nipples = lastBlock.nipples + this.nipplesDiff();
+            if(nipples < 0){
+                nipples = 0;
+            }
             beforeBlock = this.hashBlock(this.chain[this.chain.length-1]);
         }
         
-        // add block to the chain
         let block = {
             depth: this.chain.length + 1,
             timestamp: + new Date(),
             transactions: this.transactions.slice(), //array deep copy
             before: beforeBlock,
-            nipples: 0,
+            nipples: nipples,
             nonce: 0
         }
 
@@ -47,6 +91,10 @@ class BlockChain{
         return block;
     }
 
+    /**
+     * proofOfWork() function that do the mining incrementing block's nonce
+     * @param {Object} block 
+     */
     proofOfWork(block){
         let hash = this.hashBlock(block);
 
@@ -54,29 +102,8 @@ class BlockChain{
             block.nonce++;
             hash = this.hashBlock(block);
         }
+        console.log("[*] New block mined #" + block.depth);
     }
-   
-    /*
-    addTransaction(transaction){
-        this.transactions.push(transaction);
-        return this.lastBlock().index + 1;
-    }
-   
-    validChain(chain){
-        for(let i = 0, limit = chain.length-1; i < limit; i++){
-            // the hash is valid and 
-            if(!this.validProof(chain[i]) || chain[i+1].before !== this.hashBlock(chain[i])){
-                return false;
-            }
-        }
-        
-        if(!this.validProof(this.lastBlock())){
-            return false;
-        }
-        
-        return true;
-    }
-    */
 }
 
 module.exports = BlockChain;

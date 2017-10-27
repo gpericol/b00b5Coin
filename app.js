@@ -8,21 +8,24 @@ let blockchain = new Blockchain();
 
 /*
 let Transaction = require('./models/transaction');
-
-
 let transaction = new Transaction();
-
 */
+
 app.use(bodyParser.json());
 
 
+/**
+ * Just a welcome message
+ */
 app.get('/', function (req, res) {
     res.json({ 
         message: "We all l0v3 b00b5",
     }); 
 });
 
-
+/**
+ * return all the chain
+ */
 app.get('/chain', function (req, res) {
     res.json({ 
         chain: blockchain.chain,
@@ -30,18 +33,33 @@ app.get('/chain', function (req, res) {
     }); 
 });
 
-
-app.get('/mine', function (req, res) {
-    let block = blockchain.addBlock();
+/**
+ * return requestd block or the last one
+ * @param {int} depth
+ */
+app.get('/block/:depth?', function (req, res) {
+    let depth = blockchain.chain.length-1;
+    if(req.params.depth && parseInt(req.params.depth)){
+        let value = parseInt(req.params.depth) - 1;
+        if(value >= 0 && value < blockchain.chain.length){
+            depth = value;
+        }
+    }
 
     res.json({
-        message: "New Block Forged",
-        index: block.index,
-        transactions: block.transactions,
-        nonce: block.nonce,
-        previous_hash: block.before
-    });
+        block: blockchain.chain[depth],
+        hash: blockchain.hashBlock(blockchain.chain[depth])
+    }); 
 });
+
+/**
+ * mine a new block
+ */
+app.get('/mine', function (req, res) {
+    let block = blockchain.addBlock();
+    res.json(blockchain.lastBlock());
+});
+
 /*
 app.post('/transaction', function (req, res) {
     let tx = req.body;

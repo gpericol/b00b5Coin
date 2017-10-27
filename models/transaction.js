@@ -9,7 +9,7 @@ class Transaction{
     }
     
     shortAddress(publicKey){
-        return crypto.createHash('ripemd160').update(publicKey).digest('hex');
+        return crypto.createHash('ripemd160').update(Crypto.createHash('ripemd160').update(publicKey).digest()).digest('hex');
     }
 
     create(from, to, amount){
