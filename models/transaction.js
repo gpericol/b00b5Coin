@@ -1,17 +1,9 @@
 "use strict";
 
-const crypto = require('crypto');
-const EU = require('../utils/elliptic-utils');
+const Crypto = require('../utils/crypto-utils');
 
 class Transaction{
-    constructor(){
-        this.eu = new EU();
-    }
-    
-    shortAddress(publicKey){
-        return crypto.createHash('ripemd160').update(Crypto.createHash('ripemd160').update(publicKey).digest()).digest('hex');
-    }
-
+/*
     create(from, to, amount){
         let tx = {
             id: crypto.randomBytes(32).toString('hex'),
@@ -40,7 +32,7 @@ class Transaction{
         
         return this.eu.verify(JSON.stringify(tx, null, 0), transaction.sign, tx.from);
     }
-   
+*/ 
 }
 
 module.exports = Transaction;

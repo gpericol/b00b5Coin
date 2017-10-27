@@ -6,10 +6,10 @@ let app = express();
 let Blockchain = require('./models/blockchain');
 let blockchain = new Blockchain();
 
-/*
+
 let Transaction = require('./models/transaction');
 let transaction = new Transaction();
-*/
+
 
 app.use(bodyParser.json());
 
@@ -60,8 +60,13 @@ app.get('/mine', function (req, res) {
     res.json(blockchain.lastBlock());
 });
 
-/*
-app.post('/transaction', function (req, res) {
+
+app.get('/transaction', function (req, res) {
+    /*res.json({ 
+        message: Transaction.shortAddress("prova")
+    });
+    */
+    /*
     let tx = req.body;
     
     if(!transaction.validate(tx)){
@@ -70,11 +75,10 @@ app.post('/transaction', function (req, res) {
     }
 
     let index = blockchain.addTransaction(tx);
-    res.json({ 
-        message: "Transaction will be added at block #" + index,
-    }); 
+    
+    */ 
 });
-*/
+
 
 
 
