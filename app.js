@@ -20,7 +20,7 @@ app.use(function (error, req, res, next) {
       next();
     }
     return;
-  });
+});
 
 
 /**
@@ -76,6 +76,11 @@ app.get('/block/:depth?', function (req, res) {
  * mine a new block
  */
 app.get('/mine', function (req, res) {
+    // adding reward on the end of block
+    let reward = transaction.createReward(config.address);
+    blockchain.addTransaction(reward);
+
+    // mining
     let block = blockchain.addBlock();
     res.json(blockchain.lastBlock());
 });
@@ -84,7 +89,7 @@ app.get('/mine', function (req, res) {
 app.post('/transaction', function (req, res, next) {
     let tx = req.body;
     
-    if(!transaction.validate(tx)){
+    if(!transaction.validateTransaction(tx)){
         res.status(422).send({ error: 'Bad transaction format' });
         return;
     }

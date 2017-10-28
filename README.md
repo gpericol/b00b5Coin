@@ -144,12 +144,10 @@ nipples are calculated with an average ASS A55hex blocks, 2545 blocks, if time >
 {
     "tx":{
         "id": "random generated id",
-        "to":[
-            {
-                "address": "public key 1",
-                "amount": 1
-            }
-        ],
+        "to":{
+            "address": "public key 1",
+            "amount": 1
+        },
         "msg": "message"
     },
     "sign": "signature from Private Key 1",
@@ -173,7 +171,7 @@ nipples are calculated with an average ASS A55hex blocks, 2545 blocks, if time >
 ```json
 {
     "depth": 1,
-    "timestamp": 1509192009933,
+    "timestamp": 1509194576004,
     "transactions": [
         {
             "tx": {
@@ -199,10 +197,20 @@ nipples are calculated with an average ASS A55hex blocks, 2545 blocks, if time >
                 "304402200554a27ed8e80f94ef97745da925d8c3a799cc3326fe86962889bae0033b0167022009b647dcfe4be1df491ed0fda134102797fee92c3249c9f7971e1507e7e1b547",
                 "3044022006386ebe05f4c0ff1486604839d0d0c362766d6e91816838649efcf9e29c595a022002b724c2ba0649c749bda6e5cce27c31da5df43e0327bbdd34161300e943ec44"
             ]
+        },
+        {
+            "tx": {
+                "to": {
+                    "address": "042ae6b5c7801232d4c12a24743d4f58dab9912a8939be4ea49b6968938ba140e33680cb40f84b6fb57d4d0383d41126719348ebcee73c49a541bf3434c788274a",
+                    "amount": 10
+                },
+                "msg": "b00b13"
+            },
+            "sign": "3044022002b4367b311f62824adf834f83493cc9b4d4956531a8641d10661d6481786a75022007224410f5626fd43e7995156549cf445a58d6221cf2d4f6d774e3afcabc9c2a"
         }
     ],
     "before": "b0000000000000000000000000000000000000000000000000000000000000b5",
     "nipples": 0,
-    "nonce": 802988
+    "nonce": 26749
 }
 ```

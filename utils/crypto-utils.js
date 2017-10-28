@@ -50,7 +50,7 @@ class CryptoUtils{
      * @param {String} privateKey 
      * @return {String} signature
      */
-    sign(msg, privateKey){
+    static sign(msg, privateKey){
         var privKey = ec.keyFromPrivate(privateKey, 'hex');
         let hash = this.hash(msg);
         let signature = privKey.sign(hash);
