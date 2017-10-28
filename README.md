@@ -154,6 +154,21 @@ nipples are calculated with an average ASS A55hex blocks, 2545 blocks, if time >
 }
 ```
 
+### Reward Example
+```json
+{
+    "tx": {
+        "to": {
+            "address": "042ae6b5c7801232d4c12a24743d4f58dab9912a8939be4ea49b6968938ba140e33680cb40f84b6fb57d4d0383d41126719348ebcee73c49a541bf3434c788274a",
+            "amount": 10
+        },
+        "msg": "b00b13"
+    },
+    "sign": "3044022002b4367b311f62824adf834f83493cc9b4d4956531a8641d10661d6481786a75022007224410f5626fd43e7995156549cf445a58d6221cf2d4f6d774e3afcabc9c2a"
+}
+```
+
+
 ## BlockChain
 ### Block
 ```json
