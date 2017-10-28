@@ -65,7 +65,7 @@ class CryptoUtils{
      * @param {String} publicKey
      * @return {Boolean} verify result 
      */
-    verify(msg, sign, publicKey){
+    static verify(msg, sign, publicKey){
         let hash = this.hash(msg);
         let key = ec.keyFromPublic(publicKey, 'hex');
         return key.verify(hash, sign);

@@ -104,6 +104,16 @@ class BlockChain{
         }
         console.log("[*] New block mined #" + block.depth);
     }
+
+    /**
+     * addTransaction() adds a transaction to the transactions pool
+     * @param {Object} transaction 
+     * @return {integer} delpth of next block
+     */
+    addTransaction(transaction){
+        this.transactions.push(transaction);
+        return this.chain.length + 1;
+    }
 }
 
 module.exports = BlockChain;

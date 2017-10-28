@@ -44,6 +44,7 @@ for less significant bit after b00[0]*5:
 0000: 0 ---> adds a 0 in b00b5
 ```
 
+
 ### Transactions
 for signing transactions we will use ECDSA
 
@@ -67,6 +68,12 @@ and it's also supported by the elliptic library for nodeJS
   "" ""                   "" ""
 ```
 
+### Address
+address is generated from the public key: 
+```
+RIPEMD160( SHA256( publicKey ) )
+```
+
 
 ### Block Generation
 a block is generated every LOL 101hex seconds, 257seconds minutes, ~ 4 minutes
@@ -74,8 +81,9 @@ a block is generated every LOL 101hex seconds, 257seconds minutes, ~ 4 minutes
 nipples are calculated with an average ASS A55hex blocks, 2545 blocks, if time > 101hex go up else go down
 
 ## Transaction
+### Payment
 ```json
-"payment":{
+{
     "tx":{
         "id": "random generated id",
         "from": [
@@ -92,6 +100,7 @@ nipples are calculated with an average ASS A55hex blocks, 2545 blocks, if time >
                 "amount": 1
             }
         ],
+        "msg": "message",
         "fee": 1
     },
     "sign": [
@@ -99,8 +108,40 @@ nipples are calculated with an average ASS A55hex blocks, 2545 blocks, if time >
         "signature from Private Key 2"
     ]
 }
+```
 
-"reward":{
+### Payment Example
+```json
+{
+    "tx": {
+        "id": "c443383309ec0313329e6b7a556156d9e78e1139c350d56e928a3b18d60d7f76",
+        "from": [
+            "044d5f1822470e00bb2b8d8bf7585fe60e120bff0ae1f413936c9d4fdf3f98c5d33ae9c559c113c50ff4ea5833ad93c68359afd2fcd2f5f747c2ae37b9e0a0bb8e",
+            "040c976796344195f9db02d61cd715a6ca998749385b1b03cfcd23bd6d9f6124b95d47c0fd323cb9c67df1a4d8767aaff6d6e3c04ad49ff361996afe1a0799f576"
+        ],
+        "to": [
+            {
+                "address": "06e6d4c30ed7b0488c8ffc924222831ae15ad216",
+                "amount": 123
+            },
+            {
+                "address": "8279445a65100f8889fb351e3e334a329fb27f03",
+                "amount": 123
+            }
+        ],
+        "msg": "B00b5 r b34ut1Ful",
+        "fee": 1
+    },
+    "sign": [
+        "304402200554a27ed8e80f94ef97745da925d8c3a799cc3326fe86962889bae0033b0167022009b647dcfe4be1df491ed0fda134102797fee92c3249c9f7971e1507e7e1b547",
+        "3044022006386ebe05f4c0ff1486604839d0d0c362766d6e91816838649efcf9e29c595a022002b724c2ba0649c749bda6e5cce27c31da5df43e0327bbdd34161300e943ec44"
+    ]
+}
+```
+
+### Reward
+```json
+{
     "tx":{
         "id": "random generated id",
         "to":[
@@ -108,13 +149,15 @@ nipples are calculated with an average ASS A55hex blocks, 2545 blocks, if time >
                 "address": "public key 1",
                 "amount": 1
             }
-        ]
+        ],
+        "msg": "message"
     },
     "sign": "signature from Private Key 1",
 }
 ```
 
-## blockchain
+## BlockChain
+### Block
 ```json
 {
     "depth": 0,
@@ -123,5 +166,43 @@ nipples are calculated with an average ASS A55hex blocks, 2545 blocks, if time >
     "before": "hash of the previous block",
     "nonce": 0,
     "nipples": 1
+}
+```
+
+### Block Example
+```json
+{
+    "depth": 1,
+    "timestamp": 1509192009933,
+    "transactions": [
+        {
+            "tx": {
+                "id": "c443383309ec0313329e6b7a556156d9e78e1139c350d56e928a3b18d60d7f76",
+                "from": [
+                    "044d5f1822470e00bb2b8d8bf7585fe60e120bff0ae1f413936c9d4fdf3f98c5d33ae9c559c113c50ff4ea5833ad93c68359afd2fcd2f5f747c2ae37b9e0a0bb8e",
+                    "040c976796344195f9db02d61cd715a6ca998749385b1b03cfcd23bd6d9f6124b95d47c0fd323cb9c67df1a4d8767aaff6d6e3c04ad49ff361996afe1a0799f576"
+                ],
+                "to": [
+                    {
+                        "address": "06e6d4c30ed7b0488c8ffc924222831ae15ad216",
+                        "amount": 123
+                    },
+                    {
+                        "address": "8279445a65100f8889fb351e3e334a329fb27f03",
+                        "amount": 123
+                    }
+                ],
+                "msg": "B00b5 r b34ut1Ful",
+                "fee": 1
+            },
+            "sign": [
+                "304402200554a27ed8e80f94ef97745da925d8c3a799cc3326fe86962889bae0033b0167022009b647dcfe4be1df491ed0fda134102797fee92c3249c9f7971e1507e7e1b547",
+                "3044022006386ebe05f4c0ff1486604839d0d0c362766d6e91816838649efcf9e29c595a022002b724c2ba0649c749bda6e5cce27c31da5df43e0327bbdd34161300e943ec44"
+            ]
+        }
+    ],
+    "before": "b0000000000000000000000000000000000000000000000000000000000000b5",
+    "nipples": 0,
+    "nonce": 802988
 }
 ```
