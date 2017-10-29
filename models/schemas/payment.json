@@ -1,0 +1,60 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "title": "Payment",
+    "description": "a payment transaction",
+    "type": "object",
+    "properties": {
+        "tx": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{64}$"
+                },
+                "from": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "minItems": 1,
+                    "uniqueItems": true
+                },
+                "to": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "address":{
+                                "type": "string"
+                            },
+                            "amount": {
+                                "type": "integer",
+                                "exclusiveMinimum": 0
+                            }
+                        },
+                        "required": ["address", "amount"]
+                    },
+                    "minItems": 1
+                },
+                "msg": {
+                    "type": "string",
+                    "maxLength": 254
+                },
+                "fee": {
+                    "type": "integer",
+                    "exclusiveMinimum": 0
+                }
+            },
+            "required": ["id", "from", "to", "msg", "fee"]
+        },
+        "sign": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "minItems": 1,
+            "uniqueItems": true
+        }
+    },
+    "required" : ["tx", "sign"]
+}
