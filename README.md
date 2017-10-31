@@ -1,4 +1,4 @@
-# b00b5Coin [ ٩( ᐛ )و ( . ( . ) ]
+# b00b5Coin [ ٩( ᐛ )و ( o Y o ) ]
 Another cryptocurrency built for study (!scientific) purposes.
 Designed and built with all the love in the world by Gianluca Pericoli
 

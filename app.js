@@ -78,14 +78,16 @@ app.get('/block/:depth?', function (req, res) {
 app.get('/mine', function (req, res) {
     // adding reward on the end of block
     let reward = transaction.createReward(config.address);
-    blockchain.addTransaction(reward);
+    blockchain.addReward(reward);
 
     // mining
     let block = blockchain.addBlock();
     res.json(blockchain.lastBlock());
 });
 
-
+/**
+ * adds a new transaction
+ */
 app.post('/transaction', function (req, res, next) {
     let tx = req.body;
     
@@ -95,6 +97,11 @@ app.post('/transaction', function (req, res, next) {
     }
 
     let index = blockchain.addTransaction(tx);
+
+    if(index === -1){
+        res.status(422).send({ error: 'Unspendable' });
+        return;
+    }
 
     res.json({ 
         message: "Transaction will be added on Block #" + index

@@ -1,5 +1,5 @@
 "use strict";
-
+let Accountability = require('./accountability.js')
 let crypto = require('../utils/crypto-utils');
 let miner = require('../utils/miner-utils');
 
@@ -12,6 +12,7 @@ class BlockChain{
     constructor(){
         this.chain = [];
         this.transactions = [];
+        this.accountability = new Accountability();
     }
 
     /**
@@ -87,6 +88,7 @@ class BlockChain{
         this.proofOfWork(block);
        
         this.transactions = [];
+        this.accountability.approveTransactions();
         this.chain.push(block);
         return block;
     }
@@ -108,10 +110,24 @@ class BlockChain{
     /**
      * addTransaction() adds a transaction to the transactions pool
      * @param {Object} transaction 
-     * @return {integer} delpth of next block
+     * @return {integer} depth of next block
      */
     addTransaction(transaction){
+        if(this.accountability.addTransaction(transaction.tx)){
+            this.transactions.push(transaction);
+            return this.chain.length + 1;    
+        }
+        return -1;
+    }
+
+    /**
+     * addReward() adds a reward transaction to the transactions pool
+     * @param {Object} transaction 
+     * @return {integer} depth of next block
+     */
+    addReward(transaction){
         this.transactions.push(transaction);
+        this.accountability.addReward(transaction.tx);
         return this.chain.length + 1;
     }
 }
