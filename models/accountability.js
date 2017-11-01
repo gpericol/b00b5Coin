@@ -1,3 +1,5 @@
+"use strict"
+
 const Crypto = require('../utils/crypto-utils');
 
 class Accountability{
