@@ -229,3 +229,7 @@ nipples are calculated with an average ASS A55hex blocks, 2545 blocks, if time >
     "nonce": 26749
 }
 ```
+
+## LICENCE
+
+This program is free software; you can redistribute it and/or modify it under the terms of the [GNU General Public License](https://www.gnu.org/licenses/gpl-3.0.html) as published by the Free Software Foundation; either version 3 of the License, or(at your option) any later version.
