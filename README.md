@@ -44,7 +44,7 @@ for less significant bit after b00[0]*5:
 0000: 0 ---> adds a 0 in b00b5
 ```
 
-![](https://thumbs.gfycat.com/GrouchySplendidAnkolewatusi-size_restricted.gif)
+![Total Recall](https://thumbs.gfycat.com/GrouchySplendidAnkolewatusi-size_restricted.gif)
 
 ### Transactions
 for signing transactions we will use ECDSA
