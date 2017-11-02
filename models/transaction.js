@@ -66,12 +66,12 @@ class Transaction{
      * createReward() creates a reward giving a private and public key
      * @param {Object} address 
      */
-    createReward(address){
+    createReward(address, reward){
         let transaction = {
             tx: {
                 to:{
                     address: address.publicKey,
-                    amount: 10
+                    amount: reward
                 },
                 msg: address.poolName
             },

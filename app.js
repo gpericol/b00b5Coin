@@ -77,7 +77,7 @@ app.get('/block/:depth?', function (req, res) {
  */
 app.get('/mine', function (req, res) {
     // adding reward on the end of block
-    let reward = transaction.createReward(config.address);
+    let reward = transaction.createReward(config.address, blockchain.calculateNextReward());
     blockchain.addReward(reward);
 
     // mining

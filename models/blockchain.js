@@ -3,10 +3,13 @@ let Accountability = require('./accountability.js')
 let crypto = require('../utils/crypto-utils');
 let miner = require('../utils/miner-utils');
 
+// very cool magic numbers
 const genesisHash = "b0000000000000000000000000000000000000000000000000000000000000b5";
 const startNipples = 0;
 const expectedTime = 0x101; // LOL
-const nipplesAvg = 0xA55; // ASS
+const nipplesAvg = 0xA55; // Ass
+const halving = 0xB00B5; // Boobs
+const startRewardExp = 10 // 2^10 1024 Coins
 
 class BlockChain{
     constructor(){
@@ -118,6 +121,19 @@ class BlockChain{
             return this.chain.length + 1;    
         }
         return -1;
+    }
+
+    /**
+     * calculateNextReward() calculates next block reward
+     */
+    calculateNextReward(){
+        let sub = Math.floor(this.chain.length / halving);
+        let exp = startRewardExp - sub;
+
+        if(exp >= 0){
+            return Math.pow(2, exp);
+        }
+        return 0;
     }
 
     /**

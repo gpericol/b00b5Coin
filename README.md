@@ -81,6 +81,23 @@ a block is generated every LOL 101hex seconds, 257seconds minutes, ~ 4 minutes
 
 nipples are calculated with an average ASS A55hex blocks, 2545 blocks, if time > 101hex go up else go down
 
+### Miner Reward && Halving 
+the B00B5Coin starts from 1024 (2^10) Coins, the halving is every 0xB00B5 (721077) blocks, every ~5 years.
+
+```
+let sum = 0;
+for(let i=0; i<=10; i++){
+    let reward = Math.pow(2, i);
+    console.log("Reward: " + reward + " Total: " + reward* 0xB00B5);
+    sum += reward * 0xB00B5;
+}
+console.log("Total Reward: " + sum);
+// 1.476.044.619 of b00b135
+```
+
+![Halving](https://i.imgur.com/8BhMwq4.gif)
+
+
 ## Transaction
 ### Payment
 ```json
