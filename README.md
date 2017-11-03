@@ -84,7 +84,7 @@ nipples are calculated with an average ASS A55hex blocks, 2545 blocks, if time >
 ### Miner Reward & Halving 
 the B00B5Coin starts from 1024 (2^10) Coins, the halving is every 0xB00B5 (721077) blocks, every ~5 years.
 
-```
+```javascript
 let sum = 0;
 for(let i=0; i<=10; i++){
     let reward = Math.pow(2, i);
