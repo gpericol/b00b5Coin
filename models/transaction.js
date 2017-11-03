@@ -14,7 +14,7 @@ class Transaction{
     }
 
     /**
-     * validateTransaction() validates a new transaction using schema, counting signatures and checking them
+     * validateTransaction() validates a new transaction using schema, counting and checking signatures
      * @param {*} transaction 
      * @return {boolean} validation
      */
@@ -42,7 +42,7 @@ class Transaction{
     }
 
     /**
-     * validateReward() validates a new transaction using schema, counting signatures and checking them
+     * validateReward() validates a new transaction using schema, counting and checking signatures
      * @param {*} transaction 
      * @return {boolean} validation
      */
@@ -65,6 +65,8 @@ class Transaction{
     /**
      * createReward() creates a reward giving a private and public key
      * @param {Object} address 
+     * @param {String} reward
+     * @return {Object} transaction  
      */
     createReward(address, reward){
         let transaction = {

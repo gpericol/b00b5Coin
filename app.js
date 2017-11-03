@@ -33,7 +33,7 @@ app.get('/', function (req, res) {
 });
 
 /**
- * return all the chain
+ * Returns all the chain
  */
 app.get('/chain', function (req, res) {
     res.json({ 
@@ -60,7 +60,7 @@ function parseDepth(depthParam){
 }
 
 /**
- * return requestd block or the last one
+ * Returns requested block or the last one
  * @param {int} depth
  */
 app.get('/block/:depth?', function (req, res) {
@@ -73,7 +73,7 @@ app.get('/block/:depth?', function (req, res) {
 });
 
 /**
- * mine a new block
+ * Mines a new block
  */
 app.get('/mine', function (req, res) {
     // adding reward on the end of block
@@ -86,7 +86,7 @@ app.get('/mine', function (req, res) {
 });
 
 /**
- * adds a new transaction
+ * Adds a new transaction
  */
 app.post('/transaction', function (req, res, next) {
     let tx = req.body;

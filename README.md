@@ -4,8 +4,9 @@ Designed and built with all the love in the world by Gianluca Pericoli
 
 ## Algorithms
 ### Proof of Work
-it's just the HEX representation of SHA256 of the JSON Object (minified) on one block
-the difficulty is caluclated in NIPPLES
+It's just the HEX representation of SHA256 of the JSON Object (minified) on one block.
+
+The difficulty is calculated in NIPPLES
 ```
            .-''-''-.
           /   '-'  .: __
@@ -35,7 +36,7 @@ How nipples work:
 236 Nip: b0000000000000000000000000000000000000000000000000000000000000b5
 ```
 
-for less significant bit after b00[0]*5:
+for least significant bit after b00[0]*5:
 ```
 1111: f
 0111: 7
@@ -47,7 +48,7 @@ for less significant bit after b00[0]*5:
 ![Total Recall](https://thumbs.gfycat.com/GrouchySplendidAnkolewatusi-size_restricted.gif)
 
 ### Transactions
-for signing transactions we will use ECDSA
+To sign transactions we will use ECDSA
 
 https://it.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm
 
@@ -59,7 +60,7 @@ why?
 
 https://safecurves.cr.yp.to/
 
-and it's also supported by the elliptic library for nodeJS
+and it's also supported by the elliptic library for NodeJS
 ```
                              .-.
 \___________________________() ^`-, < B4rK
@@ -70,19 +71,19 @@ and it's also supported by the elliptic library for nodeJS
 ```
 
 ### Address
-address is generated from the public key: 
+Generated from the public key: 
 ```
 RIPEMD160( SHA256( publicKey ) )
 ```
 
 
 ### Block Generation
-a block is generated every LOL 101hex seconds, 257seconds minutes, ~ 4 minutes
+Generated every 0x101 hex (LOL) seconds, 257seconds minutes, ~ 4 minutes.
 
-nipples are calculated with an average ASS A55hex blocks, 2545 blocks, if time > 101hex go up else go down
+Nipples are calculated with an average 0xA55 hex (ASS) blocks, 2545 blocks, if time > 0x101 hex go up. Otherwise it goes down.
 
 ### Miner Reward & Halving 
-the B00B5Coin starts from 1024 (2^10) Coins, the halving is every 0xB00B5 (721077) blocks, every ~5 years.
+The b00b5Coin reward starts from 1024 (2^10) Coins per block, the halving of the reward is every 0xb00b5 (721.077) blocks, every ~5 years.
 
 ```javascript
 let sum = 0;
@@ -247,6 +248,12 @@ console.log("Total Reward: " + sum);
     "nonce": 26749
 }
 ```
+
+## Special Thanks To
+- Tuuli
+- chritchens
+- jeky99
+- Met4lpaca
 
 ## LICENCE
 

@@ -11,7 +11,7 @@ class Accountability{
     }
 
     /**
-     * addTransaction() validates if coins can be spent and add transaction to transactions pool 
+     * addTransaction() validates if coins can be spent and adds transaction to transactions pool 
      * @param {object} transaction 
      * @return {boolean} result
      */
@@ -19,7 +19,7 @@ class Accountability{
         let totalIn = 0;
         let totalOut = 0;
         
-        // check that addresses exists and isn't in the same block
+        // check that addresses exist and that they aren't in the same block
         for(let i = 0, tot = transaction.from.length; i < tot; i++){
             let address = Crypto.shortAddress(transaction.from[i]);
             let a = this.addresses.find( element => element.address === address );
@@ -52,7 +52,7 @@ class Accountability{
     }
 
     /**
-     * addReward() adds reward to the accountability for this transaction pool
+     * addReward() adds reward to the accountability for this transactions pool
      * @param {Object} reward 
      */
     addReward(reward){
@@ -99,7 +99,7 @@ class Accountability{
     }
 
     /**
-     * removeAddresses() clean addresses from this.addresses that are spent on this transaction pool
+     * removeAddresses() cleans the addresses from this.addresses that are spent on this transactions pool
      */
     removeAddresses(){
         for(let i=this.addresses.length-1 ; i>=0; i--){

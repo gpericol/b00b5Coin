@@ -40,7 +40,7 @@ class BlockChain{
     }
 
     /**
-     * nipplesDiff() makes an average of the time difference of 0xA55 blocks and increment or decrement the difficulty
+     * nipplesDiff() calculates the average of the time difference of 0xA55 blocks and increments or decrements the difficulty
      * @return {int} -1 | 0 | 1 
      */
     nipplesDiff(){
@@ -63,7 +63,7 @@ class BlockChain{
     }
 
     /**
-     * addblock() generate a mine a new block
+     * addblock() generates and mines a new block
      * @return {Object} block
      */
     addBlock(){
@@ -97,7 +97,7 @@ class BlockChain{
     }
 
     /**
-     * proofOfWork() function that do the mining incrementing block's nonce
+     * proofOfWork() does the mining incrementing block's nonce
      * @param {Object} block 
      */
     proofOfWork(block){
