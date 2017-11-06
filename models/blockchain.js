@@ -1,5 +1,6 @@
 "use strict";
-let Accountability = require('./accountability.js')
+let Accountability = require('./accountability.js');
+let Db = require('./db.js');
 let crypto = require('../utils/crypto-utils');
 let miner = require('../utils/miner-utils');
 
@@ -13,6 +14,7 @@ const startRewardExp = 10 // 2^10 1024 Coins
 
 class BlockChain{
     constructor(){
+        this.db = new Db();
         this.chain = [];
         this.transactions = [];
         this.accountability = new Accountability();
