@@ -250,6 +250,7 @@ console.log("Total Reward: " + sum);
 ```
 
 ## Special Thanks To
+- torejx
 - Tuuli
 - chritchens
 - jeky99
