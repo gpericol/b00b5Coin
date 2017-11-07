@@ -4,8 +4,8 @@ CREATE TABLE block(
     timestamp INTEGER NOT NULL,
     hash VARCHAR(64) NOT NULL,
     before VARCHAR(64) NOT NULL,
-    nonce INTEGER NOT NULL,
-    nipples TINYINT NOT NULL
+    nipples TINYINT NOT NULL,    
+    nonce INTEGER NOT NULL
 );
 DROP INDEX IF EXISTS hash_idx;
 CREATE INDEX hash_idx ON block(hash);
@@ -16,8 +16,8 @@ CREATE TABLE tx(
     type TINYINT NOT NULL,
     block_depth INTEGER NOT NULL,
     position TINYINT NOT NULL,
-    msg TEXT NOT NULL,
-    fee INTEGER NOT NULL
+    msg TEXT,
+    fee INTEGER
 );
 DROP INDEX IF EXISTS block_depth_idx;
 CREATE INDEX block_depth_idx ON tx(block_depth);

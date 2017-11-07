@@ -71,6 +71,7 @@ class Transaction{
     createReward(address, reward){
         let transaction = {
             tx: {
+                id: Crypto.randomId(),
                 to:{
                     address: address.publicKey,
                     amount: reward

@@ -82,7 +82,7 @@ Generated every 0x101 hex (LOL) seconds, 257seconds minutes, ~ 4 minutes.
 
 Nipples are calculated with an average 0xA55 hex (ASS) blocks, 2545 blocks, if time > 0x101 hex go up. Otherwise it goes down.
 
-Sum of bytes of transactions MUST be of 0x717 hex (TIT) bytes.
+Sum of bytes of transactions MUST be less or equal of 0x717 hex (TIT) bytes.
 
 ### Miner Reward & Halving 
 The b00b5Coin reward starts from 1024 (2^10) Coins per block, the halving of the reward is every 0xb00b5 (721.077) blocks, every ~5 years.

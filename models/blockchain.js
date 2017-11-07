@@ -95,6 +95,9 @@ class BlockChain{
         this.transactions = [];
         this.accountability.approveTransactions();
         this.chain.push(block);
+
+        this.db.saveBlock(block,  this.hashBlock(this.chain[this.chain.length-1]));
+        
         return block;
     }
 

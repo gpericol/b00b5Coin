@@ -24,6 +24,15 @@ class CryptoUtils{
     }
 
     /**
+     * randomId() generates a randomId HEX
+     * @param {String} msg 
+     * @return {String} string
+     */
+    static randomId(){
+        return crypto.randomBytes(32).toString('hex');
+    }
+
+    /**
      * shortAddress() generates address from publicKey
      * @param {String} publicKey 
      * @return {String} string
