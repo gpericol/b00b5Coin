@@ -23,6 +23,59 @@ class DB{
         db.close();
     }
 
+    getBlock(depth){
+        let block = {};
+        let sql = "SELECT * FROM block WHERE Depth  = ?";
+        // first row only
+        this.db.get(sql, [depth], (err, row) => {
+            if (err) {
+                return console.error(err.message);
+            }
+            if(!row){
+                return false;
+            }
+            let transactions = this._getTransactions(depth);
+            block = {
+                depth: row.depth,
+                timestamp: row.timestamp,
+                transactions: transactions, //array deep copy
+                before: row.before,
+                nipples: row.nipples,
+                nonce: row.nonce
+            }
+        });
+    }
+
+    _getTransactions(depth){
+        let sql = "SELECT * FROM transaction WHERE block_depth  = ? ORDER BY position ASC";
+        /*
+        db.all(sql, [], (err, rows) => {
+            if (err) {
+              throw err;
+            }
+            rows.forEach((row) => {
+              console.log(row.name);
+            });
+        });
+        */
+    }
+    _getPaymentFrom(tx_id){
+        let sql = "SELECT * FROM from WHERE tx_id  = ? ORDER BY position ASC";
+    }
+    _getPaymentTo(tx_id){
+        let sql = "SELECT * FROM to WHERE tx_id  = ? ORDER BY position ASC";
+    }
+    _getPaymentSign(tx_id){
+        let sql = "SELECT * FROM sign WHERE tx_id  = ? ORDER BY position ASC";
+    }
+    _getRewardTo(tx_id){
+        let sql = "SELECT * FROM to WHERE tx_id  = ? ORDER BY position ASC";
+    }
+    _getRewardSign(tx_id){
+        let sql = "SELECT * FROM sign WHERE tx_id  = ? ORDER BY position ASC";
+    }
+   
+
     saveBlock(block, hash){
         this.db.run("begin transaction");
         let sql = "INSERT INTO block (depth, timestamp, hash, before, nipples, nonce) VALUES (?, ?, ?, ?, ?, ?)";
@@ -37,6 +90,7 @@ class DB{
 
         this.db.run("commit");
         console.log("\x1b[32m[*]\x1b[0m Inserted Block #" + block.depth);
+        this.getBlock(block.depth);
     }
 
     _saveTransactions(transactions, depth){
