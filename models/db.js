@@ -1,7 +1,9 @@
 "use strict";
 
 const sqlite3 = require('sqlite3').verbose();
-const fs = require('fs')
+const fs = require('fs');
+const TYPE_PAYMENT = 0;
+const TYPE_REWARD = 1;
 
 class DB{
     constructor(){
@@ -22,22 +24,25 @@ class DB{
     }
 
     saveBlock(block, hash){
+        this.db.run("begin transaction");
         let sql = "INSERT INTO block (depth, timestamp, hash, before, nipples, nonce) VALUES (?, ?, ?, ?, ?, ?)";
         let params = [block.depth, block.timestamp, hash, block.before, block.nipples, block.nonce];
         
         this.db.run(sql, params, function(err) {
             if (err) {
                 return console.log(err.message);
-            }         
-            console.log("[*] Inserted Block #" + block.depth);
+            }
         }); 
-        this.saveTransactions(block.transactions, block.depth);   
+        this._saveTransactions(block.transactions, block.depth);
+
+        this.db.run("commit");
+        console.log("\x1b[32m[*]\x1b[0m Inserted Block #" + block.depth);
     }
 
-    saveTransactions(transactions, depth){
+    _saveTransactions(transactions, depth){
         for(let i = 0; i < transactions.length; i++){
             let tx =  transactions[i];
-            let type = tx.from ? 0 : 1;
+            let type = tx.from ? TYPE_PAYMENT : TYPE_REWARD;
             let fee = tx.from ? tx.tx.fee : null;
 
             let sql = "INSERT INTO tx (tx_id, type, block_depth, position, msg, fee) VALUES (?, ?, ?, ?, ?, ?)";
@@ -48,16 +53,23 @@ class DB{
                     return console.log(err.message);
                 }
             }); 
-            this.saveTo(tx.tx.to, tx.tx.id);
+
+            if(type == TYPE_PAYMENT){
+                this._savePaymentTo(tx.tx.to, tx.tx.id);
+                this._savePaymentFrom(tx.tx.from, tx.tx.id);
+                this._savePaymentSign(tx.sign, tx.tx.id);
+            }else{
+                this._saveRewardTo(tx.tx.to, tx.tx.id);
+                this._saveRewardSign(tx.sign, tx.tx.id);
+            }
         }
     }
-
-    saveTo(to, id){
-
+    
+    _savePaymentTo(to, id){
         for(let i = 0; i < to.length; i++){
             let t = to[i];
             let sql = "INSERT INTO output (tx_id, position, address, amount) VALUES (?, ?, ?, ?)";
-            let params = [id, i, depth, i, t.address, t.amount];
+            let params = [id, i, t.address, t.amount];
 
             this.db.run(sql, params, function(err) {
                 if (err) {
@@ -65,6 +77,56 @@ class DB{
                 }
             }); 
         }
+    }
+
+    _savePaymentFrom(from, id){
+        for(let i = 0; i < from.length; i++){
+            let f = from[i];
+            let sql = "INSERT INTO input (tx_id, position, address) VALUES (?, ?, ?)";
+            let params = [id, i, f.address];
+
+            this.db.run(sql, params, function(err) {
+                if (err) {
+                    return console.log(err.message);
+                }
+            }); 
+        }
+    }
+
+    _savePaymentSign(sign, id){
+        for(let i = 0; i < sign.length; i++){
+            let s = sign[i];
+            let sql = "INSERT INTO sign (tx_id, position, sign) VALUES (?, ?, ?)";
+            let params = [id, i, s.sign];
+
+            this.db.run(sql, params, function(err) {
+                if (err) {
+                    return console.log(err.message);
+                }
+            }); 
+        }
+    }
+
+    _saveRewardTo(to, id){
+        let sql = "INSERT INTO output (tx_id, position, address, amount) VALUES (?, ?, ?, ?)";
+        let params = [id, -1, to.address, to.amount];
+
+        this.db.run(sql, params, function(err) {
+            if (err) {
+                return console.log(err.message);
+            }
+        });
+    }
+
+    _saveRewardSign(sign, id){
+        let sql = "INSERT INTO sign (tx_id, position, sign) VALUES (?, ?, ?)";
+        let params = [id, -1, sign];
+
+        this.db.run(sql, params, function(err) {
+            if (err) {
+                return console.log(err.message);
+            }
+        }); 
     }
 
     destructor(){
